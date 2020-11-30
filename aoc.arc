@@ -1,5 +1,5 @@
 ; https://github.com/knarka
-; licensed under the MIT license
+; licensed under the MIT license - see LICENSE
 
 (load "lib/strings.arc")
 
