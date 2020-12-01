@@ -6,7 +6,7 @@
 
 (def outer (data)
      (iflet x (inner (car data) (cdr data) data)
-	    (list (car x) '* (cadr x) '* (caddr x) '= (apply * x))
+	    (apply * x)
 	    (empty (cdr data)) nil
 	    (outer (cdr data))))
 
