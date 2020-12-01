@@ -11,6 +11,5 @@
 	    (empty (cdr data)) nil
 	    (outer (cdr data))))
 
-(def run-puzzle ()
-     (outer (map [int _] (dump-puzzle-input 1 1))))
-
+(def run-puzzle (e)
+     (outer (map [int _] (dump-puzzle-input 1 e))))

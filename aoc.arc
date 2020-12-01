@@ -26,8 +26,8 @@ excluding empty lines.
 #|
 Dump (example) data file for a day and part
 |#
-(def dump-puzzle-input (day part (o example))
-     (dump-file (string "data/d" day "p" part (if example "e") ".data")))
+(def dump-puzzle-input (day (o example))
+     (dump-file (string "data/day" day (if example "e") ".data")))
 
 
 #|
@@ -35,12 +35,12 @@ Runs the given day and part if a suitable file exists,
 creates a template if it does not exist.
 Assumes the day/part has a function called run-puzzle.
 |#
-(def run (day part)
+(def run (day part (o e nil))
      (= filename (string "day" day "p" part ".arc"))
      (if (file-exists filename)
        (do
 	 (load filename)
-	 (run-puzzle))
+	 (run-puzzle e))
        (do
-	 (w/outfile outf filename (disp "(def run-puzzle () \"hello\")" outf))
+	 (w/outfile outf filename (disp (string "(def run-puzzle (e)\n (dump-puzzle-input " day "))") outf))
 	 (prn "file " filename " created. good luck!"))))
