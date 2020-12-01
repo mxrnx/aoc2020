@@ -3,6 +3,9 @@
 
 (load "lib/strings.arc")
 
+(def caddr (seq)
+     (car (cdr (cdr seq))))
+
 #|
 Reads a data input line by line, stripping whitespace.
 Ignores empty lines, but has trouble with multiple empty lines.
@@ -19,6 +22,13 @@ excluding empty lines.
 (def dump-file (x)
      (w/infile inf x
 	       (read-data inf)))
+
+#|
+Dump (example) data file for a day and part
+|#
+(def dump-puzzle-input (day part (o example))
+     (dump-file (string "data/d" day "p" part (if example "e") ".data")))
+
 
 #|
 Runs the given day and part if a suitable file exists,
