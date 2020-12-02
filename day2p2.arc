@@ -3,7 +3,7 @@
 		  idx2 (pos #\  l)
 		  low  (int (cut l 0 idx1))
 		  high (int (cut l (+ idx1 1) idx2))
-		  cnt (count (find letter l) (list ((get (+ low idx2 3)) l) ((get (+ high idx2 3)) l))))
+		  cnt (count (find letter l) (list (l (+ low idx2 3)) (l (+ high idx2 3)))))
 	    (is cnt 1)))
 
 (def run-puzzle (e)
