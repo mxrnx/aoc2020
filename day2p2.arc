@@ -1,0 +1,10 @@
+(def line (l)
+     (withs (idx1 (pos #\- l)
+	     idx2 (pos #\  l)
+	     low  (int (cut l 0 idx1))
+	     high (int (cut l (+ idx1 1) idx2))
+	     cnt (count (find letter l) (list ((get (+ low idx2 3)) l) ((get (+ high idx2 3)) l))))
+	    (is cnt 1)))
+
+(def run-puzzle (e)
+     (count t (map line (dump-puzzle-input 2 e))))
