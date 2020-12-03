@@ -2,7 +2,7 @@
   (if (>= h fin)
       add
       (let nw (mod w wrp)
-	(+ (solve (+ h sh) (+ nw sw) sh sw (if (is ((chart h) nw) #\#) 1 0)) add))))
+	(+ (solve (+ h sh) (+ nw sw) sh sw (if (is chart.h.nw #\#) 1 0)) add))))
 
 (def run-puzzle (e)
   (= chart (dump-puzzle-input 3 e)
