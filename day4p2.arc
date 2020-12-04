@@ -1,23 +1,24 @@
-(def rectify (data)
-  (accum add
-    (let curr ""
-      (each x data
-	(if (is x (last data))
-	    (add (+ curr #\ x))
-	    (if (headmatch "\n" x)
-		(do (add curr)
-		    (= curr (cut x 1)))
-		(= curr (+ curr #\  x))))))))
+; join all the items in seq, seperated by sep.
+(def string2 (seq sep)
+  (if (empty (cdr seq)) (car seq)
+      (string (car seq) sep (string2 (cdr seq) sep))))
 
-(def list->alist (seq)
+; split the data properly into strings of one passport each
+(def rectify (data)
+ (tokens (string2 data #\ ) #\newline))
+
+; convert rectify results to alist
+(def data->alist (seq)
   (cons (map (fn (x) (map [coerce _ 'sym] (tokens x #\:))) (tokens (car seq) #\ )) 
 	(if (cdr seq)
-	    (list->alist (cdr seq))
+	    (data->alist (cdr seq))
 	    nil)))
 
+; low <= x <= high
 (def between (x low high)
-  (and (>= x low) (<= x high)))
+  (and (<= low x) (<= x high)))
 
+; recurses through a color code, calls/cc when it knows a code is right or wrong
 (def test-color-code (ep code)
   (if (empty code) (ep t)
       (if (or (between (car code) #\0 #\9)
@@ -28,6 +29,7 @@
 (def sym->int (x) (int (string x)))
 (def sym->charlist (x) (coerce (string x) 'cons))
 
+; check passport correctness
 (def check-passport (pass)
   (and
     (let byr (alref pass 'byr) (and (no:empty byr) (between (sym->int byr) 1920 2002)))
@@ -42,7 +44,5 @@
     (let pid (alref pass 'pid) (and (no:empty pid) (is (len (sym->charlist pid)) 9)))))
 
 
-(def make-alists (data))
-
 (def run-puzzle (e)
-  (count t (map check-passport (list->alist (rectify (dump-puzzle-input 4 e idfn))))))
+  (count t (map check-passport (data->alist (rectify (dump-puzzle-input 4 e idfn))))))
