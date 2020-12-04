@@ -1,11 +1,6 @@
-; join all the items in seq, seperated by sep.
-(def string2 (seq sep)
-  (if (empty (cdr seq)) (car seq)
-      (string (car seq) sep (string2 (cdr seq) sep))))
-
 ; split the data properly into strings of one passport each
 (def rectify (data)
- (tokens (string2 data #\ ) #\newline))
+ (tokens (string (intersperse #\  data)) #\newline))
 
 ; convert rectify results to alist
 (def data->alist (seq)
