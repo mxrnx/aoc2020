@@ -38,6 +38,5 @@
     (let ecl (alref pass 'ecl) (and (no:empty ecl) (isnt 0 (count ecl '(amb blu brn gry grn hzl oth)))))
     (let pid (alref pass 'pid) (and (no:empty pid) (is (len (sym->charlist pid)) 9)))))
 
-
 (def run-puzzle (e)
   (count t (map check-passport (data->alist (rectify (dump-puzzle-input 4 e idfn))))))
