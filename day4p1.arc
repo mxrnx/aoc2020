@@ -4,7 +4,7 @@
 
 ; convert rectify results to alist
 (def data->alist (seq)
-  (cons (map (fn (x) (map [coerce _ 'sym] (tokens x #\:))) (tokens (car seq) #\ )) 
+  (cons (map (fn (x) (map sym (tokens x #\:))) (tokens (car seq) #\ )) 
 	(if (cdr seq)
 	    (data->alist (cdr seq))
 	    nil)))

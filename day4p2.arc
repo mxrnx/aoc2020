@@ -4,7 +4,7 @@
 
 ; convert rectify results to alist
 (def data->alist (seq)
-  (cons (map (fn (x) (map [coerce _ 'sym] (tokens x #\:))) (tokens (car seq) #\ )) 
+  (cons (map (fn (x) (map sym (tokens x #\:))) (tokens (car seq) #\ )) 
 	(if (cdr seq)
 	    (data->alist (cdr seq))
 	    nil)))
@@ -30,7 +30,7 @@
     (let byr (alref pass 'byr) (and (no:empty byr) (between (sym->int byr) 1920 2002)))
     (let iyr (alref pass 'iyr) (and (no:empty iyr) (between (sym->int iyr) 2010 2020)))
     (let eyr (alref pass 'eyr) (and (no:empty eyr) (between (sym->int eyr) 2020 2030)))
-    (let hgt (coerce (alref pass 'hgt) 'string) (and (no:empty hgt)
+    (let hgt (string (alref pass 'hgt)) (and (no:empty hgt)
 						 (if (endmatch "cm" hgt) (between (int (cut hgt 0 -2)) 150 193)
 						     (endmatch "in" hgt) (between (int (cut hgt 0 -2)) 59 76)
 						     nil)))
