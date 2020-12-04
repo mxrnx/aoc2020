@@ -11,7 +11,7 @@
 
 ; check passport correctness
 (def check-passport (pass)
-  (pos nil (map [alref pass _] '(ecl pid eyr hcl byr iyr hgt))))
+  (~pos nil (map [alref pass _] '(ecl pid eyr hcl byr iyr hgt))))
 
 (def run-puzzle (e)
-  (count nil (map check-passport (data->alist (rectify (dump-puzzle-input 4 e idfn))))))
+  (count t (map check-passport (data->alist (rectify (dump-puzzle-input 4 e idfn))))))
