@@ -10,24 +10,24 @@
 Reads a data input line by line, stripping whitespace.
 Ignores empty lines, but has trouble with multiple empty lines.
 |#
-(def read-data (inf)
+(def read-data (inf trimfn)
      (if (peekc inf)
-       (cons (trim (readline inf)) (read-data inf))
+       (cons (trimfn (readline inf)) (read-data inf trimfn))
        nil))
 
 #|
 Dumps content of a file into a list with lines,
 excluding empty lines.
 |#
-(def dump-file (x)
+(def dump-file (x trimfn)
      (w/infile inf x
-	       (read-data inf)))
+	       (read-data inf trimfn)))
 
 #|
 Dump (example) data file for a day and part
 |#
-(def dump-puzzle-input (day (o example))
-     (dump-file (string "data/day" day (if example "e") ".data")))
+(def dump-puzzle-input (day (o example) (o trimfn trim))
+     (dump-file (string "data/day" day (if example "e") ".data") trimfn))
 
 
 #|
