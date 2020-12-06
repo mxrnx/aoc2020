@@ -1,6 +1,6 @@
 ; split the data properly into strings of one passport each
 (def rectify (data)
- (tokens (string (intersperse #\  data)) #\newline))
+  (tokens (string (intersperse #\  data)) #\newline))
 
 ; convert rectify results to alist
 (def data->alist (seq)
@@ -31,9 +31,9 @@
     (let iyr (alref pass 'iyr) (and (no:empty iyr) (between (sym->int iyr) 2010 2020)))
     (let eyr (alref pass 'eyr) (and (no:empty eyr) (between (sym->int eyr) 2020 2030)))
     (let hgt (string (alref pass 'hgt)) (and (no:empty hgt)
-						 (if (endmatch "cm" hgt) (between (int (cut hgt 0 -2)) 150 193)
-						     (endmatch "in" hgt) (between (int (cut hgt 0 -2)) 59 76)
-						     nil)))
+					     (if (endmatch "cm" hgt) (between (int (cut hgt 0 -2)) 150 193)
+						 (endmatch "in" hgt) (between (int (cut hgt 0 -2)) 59 76)
+						 nil)))
     (let hcl (sym->charlist (alref pass 'hcl)) (and (no:empty hcl) (headmatch "#" hcl) (ccc (fn (ep) (test-color-code ep (cut hcl 1))))))
     (let ecl (alref pass 'ecl) (and (no:empty ecl) (isnt 0 (count ecl '(amb blu brn gry grn hzl oth)))))
     (let pid (alref pass 'pid) (and (no:empty pid) (is (len (sym->charlist pid)) 9)))))

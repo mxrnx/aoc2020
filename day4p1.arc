@@ -1,6 +1,6 @@
 ; split the data properly into strings of one passport each
 (def rectify (data)
- (tokens (string (intersperse #\  data)) #\newline))
+  (tokens (string (intersperse #\  data)) #\newline))
 
 ; convert rectify results to alist
 (def data->alist (seq)
