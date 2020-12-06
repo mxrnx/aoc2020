@@ -15,4 +15,4 @@
 		 (map
 		   [+ (* 8 (bin->dec (int (multisubst '(("F" "0") ("B" "1")) (cut _ 0 7)))))
 		      (bin->dec (int (multisubst '(("L" "0") ("R" "1")) (cut _ 7 10))))]
-		   (dump-puzzle-input 5))) 6))
+		   (puzzle-input 5 'strs))) 6))

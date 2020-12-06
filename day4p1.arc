@@ -14,4 +14,4 @@
   (~pos nil (map [alref pass _] '(ecl pid eyr hcl byr iyr hgt))))
 
 (def run-puzzle (e)
-  (count t (map check-passport (data->alist (rectify (dump-puzzle-input 4 e idfn))))))
+  (count t (map check-passport (data->alist (rectify (puzzle-input 4 'strs e))))))

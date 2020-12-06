@@ -4,31 +4,23 @@
 (load "lib/strings.arc")
 
 (def caddr (seq)
-     (car (cdr (cdr seq))))
+  (car (cdr (cdr seq))))
 
 #|
-Reads a data input line by line, stripping whitespace.
-Ignores empty lines, but has trouble with multiple empty lines.
+Gets puzzle input for some integer `day` from the data folder.
+If `example` is true, gets the example puzzle input instead.
+Format can be:
+- `strs` to return a list of strings, split on the newlines.
+- `syms` to return a list of all valid Arc symbols in the data.
+- `chrs` to return a blob of raw characters.
 |#
-(def read-data (inf trimfn)
-     (if (peekc inf)
-       (cons (trimfn (readline inf)) (read-data inf trimfn))
-       nil))
-
-#|
-Dumps content of a file into a list with lines,
-excluding empty lines.
-|#
-(def dump-file (x trimfn)
-     (w/infile inf x
-	       (read-data inf trimfn)))
-
-#|
-Dump (example) data file for a day and part
-|#
-(def dump-puzzle-input (day (o example) (o trimfn trim))
-     (dump-file (string "data/day" day (if example "e") ".data") trimfn))
-
+(def puzzle-input (day format (o example))
+  (let fname (string "data/day" day (if example "e") ".data")
+   (w/infile inf fname
+    (case format
+      strs (drain (readline inf))
+      syms (readall inf)
+      chrs (allchars inf)))))
 
 #|
 Runs the given day and part if a suitable file exists,
@@ -36,11 +28,11 @@ creates a template if it does not exist.
 Assumes the day/part has a function called run-puzzle.
 |#
 (def run (day part (o e nil))
-     (= filename (string "day" day "p" part ".arc"))
-     (if (file-exists filename)
-       (do
-	 (load filename)
-	 (run-puzzle e))
-       (do
-	 (w/outfile outf filename (disp (string "(def run-puzzle (e)\n (dump-puzzle-input " day "))") outf))
-	 (prn "file " filename " created. good luck!"))))
+  (= filename (string "day" day "p" part ".arc"))
+  (if (file-exists filename)
+      (do
+	(load filename)
+	(run-puzzle e))
+      (do
+	(w/outfile outf filename (disp (string "(def run-puzzle (e)\n (dump-puzzle-input " day "))") outf))
+	(prn "file " filename " created. good luck!"))))

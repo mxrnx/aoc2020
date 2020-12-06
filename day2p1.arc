@@ -7,4 +7,4 @@
 	    (and (<= low cnt) (>= high cnt))))
 
 (def run-puzzle (e)
-     (count t (map line (dump-puzzle-input 2 e))))
+     (count t (map line (puzzle-input 2 'strs e))))

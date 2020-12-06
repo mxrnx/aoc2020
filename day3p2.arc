@@ -5,7 +5,7 @@
 	(+ (solve (+ h sh) (+ nw sw) sh sw (if (is chart.h.nw #\#) 1 0)) add))))
 
 (def run-puzzle (e)
-  (= chart (dump-puzzle-input 3 e)
+  (= chart (puzzle-input 3 'strs e)
      fin (len chart)
      wrp (len (car chart)))
   (apply * (map (fn (sh sw) (solve 0 0 sh sw 0))

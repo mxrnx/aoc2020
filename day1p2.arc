@@ -11,4 +11,4 @@
 	    (outer (cdr data))))
 
 (def run-puzzle (e)
-     (outer (map [int _] (dump-puzzle-input 1 e))))
+     (outer (map [int _] (puzzle-input 1 'strs e))))
