@@ -1,4 +1,3 @@
-; assembler instructions
 (mac acc (n) `(1 ,n))
 (mac nop (n) '(1 0))
 (mac jmp (n) `(,n 0))
