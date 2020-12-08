@@ -12,6 +12,7 @@ If `example` is true, gets the example puzzle input instead.
 Format can be:
 - `strs` to return a list of strings, split on the newlines.
 - `syms` to return a list of all valid Arc symbols in the data.
+- `syms` to return a list of lines of Arc symbols (combines the former two options)
 - `chrs` to return a blob of raw characters.
 |#
 (def puzzle-input (day format (o example))
@@ -20,6 +21,7 @@ Format can be:
     (case format
       strs (drain (readline inf))
       syms (readall inf)
+      syml (map readall (drain (readline inf)))
       chrs (allchars inf)))))
 
 #|
