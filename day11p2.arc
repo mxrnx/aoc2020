@@ -33,4 +33,4 @@
   (each line data (prn line)) (prn) data)
 
 (def run-puzzle (e)
-  (apply + (map [count #\# _] (sim (prn-world (puzzle-input 11 'strs e))))))
+  (apply + (map [count #\# _] (sim (puzzle-input 11 'strs e)))))
