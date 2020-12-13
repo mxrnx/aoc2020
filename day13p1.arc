@@ -1,0 +1,7 @@
+(def run-puzzle (e)
+  (withs (data (puzzle-input 13 'strs e)
+	       begin (int (car data))
+	       buses (rem nil (map [if (is _ "x") nil (int _)] (tokens (cadr data) #\,)))
+	       delays (map [min (mod (- begin) _) _] buses)
+	       min-t (apply min delays))
+   (string "line " (buses (pos min-t delays)) ", delay " min-t)))
