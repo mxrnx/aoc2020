@@ -30,6 +30,7 @@ creates a template if it does not exist.
 Assumes the day/part has a function called run-puzzle.
 |#
 (def run (day part (o e nil))
+  (if (< day 10) (= day (string '0 day)))
   (= filename (string "day" day "p" part ".arc"))
   (if (file-exists filename)
       (do
