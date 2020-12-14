@@ -35,7 +35,7 @@ Assumes the day/part has a function called run-puzzle.
   (if (file-exists filename)
       (do
 	(load filename)
-	(run-puzzle e))
+	(time (run-puzzle e)))
       (do
 	(w/outfile outf filename (disp (string "(def run-puzzle (e)\n (puzzle-input " day " 'strs e))") outf))
 	(prn "file " filename " created. good luck!"))))
